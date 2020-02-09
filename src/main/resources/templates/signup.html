@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:th="http://www.thymeleaf.org">
+<head>
+ <title>Create User Profile|EMEDO FELIX</title>
+
+		<link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css">
+	
+	<link href="css/custom.css" rel="stylesheet">
+	
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>	
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+ 
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">User Profile Management</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/}">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" th:href="@{/signup}">Create New User</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li> -->
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container my-4">
+        <h5> Create New User</h5>
+        <div class="card">
+            <div class="card-body">
+                <div class="col-md-12">
+       <div class="row">
+             <div class="col-md-3"></div>
+             <div class="col-md-6">
+              <div class="alert alert-success" role="alert" th:if="${msg}" th:utext="${msg}">
+     </div>
+             </div>
+         </div>          
+     <form class="form-horizontal" role="form" method="POST" th:action="@{/signup}" th:object="${user}">
+     
+        
+         <div class="row">
+             <div class="col-md-3 field-label-responsive">
+                 <label for="name">First Name</label>
+             </div>
+             <div class="col-md-6">
+                 <div class="form-group">
+                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        
+                         <input type="text" th:field="*{firstname}" class="form-control" id="firstname"
+                                placeholder="First Name" required autofocus>
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <div class="row">
+             <div class="col-md-3 field-label-responsive">
+                 <label for="name">Last Name</label>
+             </div>
+             <div class="col-md-6">
+                 <div class="form-group">
+                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                         
+                         <input type="text" th:field="*{lastname}" class="form-control" id="lastname"
+                                placeholder="Last name" required autofocus>
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <div class="row">
+             <div class="col-md-3 field-label-responsive">
+                 <label for="email">Email</label>
+             </div>
+             <div class="col-md-6">
+                 <div class="form-group">
+                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                      
+                         <input type="text" th:field="*{email}" class="form-control" id="email"
+                                placeholder="your-name@gmail.com" required autofocus>
+                     </div>
+                 </div>
+             </div>
+             <div class="col-md-3">
+                 <div class="form-control-feedback">
+                         <span class="text-danger align-middle" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+                         </span>
+                 </div>
+             </div>
+         </div>
+         <div class="row">
+             <div class="col-md-3 field-label-responsive">
+                 <label for="name">Phone Number</label>
+             </div>
+             <div class="col-md-6">
+                 <div class="form-group">
+                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                         
+                         <input type="text" th:field="*{phone}" class="form-control" id="phone"
+                                placeholder="Phone Number" required autofocus>
+                     </div>
+                 </div>
+             </div>
+         </div>
+          <div class="row">
+             <div class="col-md-3 field-label-responsive">
+                 <label for="name">Gender</label>
+             </div>
+             <div class="col-md-6">
+                 <div class="form-group">
+                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                         <select id="gender" th:field="*{gender}" class="form-control">
+                         <option value="MALE">MALE</option>
+                          <option value="FEMALE">FEMALE</option>
+                         </select>
+                         
+                     </div>
+                 </div>
+             </div>
+         </div>
+         
+          <div class="row">
+             <div class="col-md-3 field-label-responsive">
+                 <label for="name">Nationality</label>
+             </div>
+             <div class="col-md-6">
+                 <div class="form-group">
+                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                         <select id="nationality" th:field="*{nationality}" class="form-control">
+                         <option value="NIGERIA">NIGERIA</option>
+                        
+                         </select>
+                         
+                     </div>
+                 </div>
+             </div>
+         </div>
+         
+                  <div class="row">
+             <div class="col-md-3 field-label-responsive">
+                 <label for="name">Date of Birth</label>
+             </div>
+             <div class="col-md-6">
+                 <div class="form-group">
+                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                          <input type="date" th:field="*{dob}" class="form-control" id="phone"
+                                placeholder="Date of Birth" required autofocus>
+                     </div>
+                 </div>
+             </div>
+         </div>
+        
+                 <div class="row">
+             <div class="col-md-3 field-label-responsive">
+                 <label for="name">Role</label>
+             </div>
+             <div class="col-md-6">
+                 <div class="form-group">
+                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                         <select id="role" th:field="*{role}" class="form-control">
+                         <option value="CUSTOMER">CUSTOMER</option>
+                          <option value="ADMIN">ADMIN</option>
+                         </select>
+                         
+                     </div>
+                 </div>
+             </div>
+         </div>
+         
+                  <div class="row">
+             <div class="col-md-3 field-label-responsive">
+                 <label for="status">Status</label>
+             </div>
+             <div class="col-md-6">
+                 <div class="form-group">
+                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                         <select id="active" th:field="*{active}" class="form-control">
+                         <option value="1" selected="selected">Active</option>
+                          <option value="0">Inactive</option>
+                         </select>
+                         
+                     </div>
+                 </div>
+             </div>
+         </div>
+         
+         <div class="row">
+             <div class="col-md-3"></div>
+             <div class="col-md-6">
+                 <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-user-plus"></i> Submit</button>
+             </div>
+         </div>
+     </form>
+ 
+ 
+            </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8" />
+	<title>Home Page|EMEDO FELIX</title>
+	
+		<link th:rel="stylesheet" th:href="@{../webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css">
+	
+	<link href="../css/custom.css" rel="stylesheet">
+	
+<script th:src="@{../webjars/jquery/jquery.min.js}"></script>	
+<script th:src="@{../webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{../webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+<link rel="stylesheet" th:href="@{/webjars/font-awesome/5.2.0/css/fontawesome.min.css}">
+
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+
+	
+</head>
+
+<body>
+	<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">User Profile Management</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/}">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                 <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/signup}">(Create New User)</a>
+                </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container my-2">
+        <div class="card">
+            <div class="card-body">
+                <div th:switch="${users.size()}" class="container">
+                   
+                    <div class="col-md-12">
+                       <div th:case="0"  class="alert alert-danger" role="alert">No User Record Found!</div>
+                        <div th:case="*">
+                         <p class="">
+                       <!--  <a href="" class="btn btn-primary"><i
+       class="fas fa-user-plus ml-2"> Delete User</i></a> -->
+       
+     
+       
+                    </p>
+                    
+                     <div class="row">       
+             <div class="col-md-12">
+              <div class="alert alert-success" role="alert" th:if="${msg}" th:utext="${msg}">
+     </div>
+             </div>
+         </div>
+                    <table class="table table-striped table-responsive-md">
+                                <tr>
+                                <td align="left">
+                                 
+                                    </td>
+                                    <td align="right">
+                                     <form class="form-horizontal" role="form" method="POST" th:action="@{/search}">
+                                      <input type="text" class="" id="item" name="item"
+                                placeholder="Enter Search Item" required autofocus> <button>Find</button>
+                                     </form>
+                                    </td>
+                               </tr>
+                   </table>
+                   
+                    <form class="form-horizontal" role="form" method="POST" th:action="@{/deleteUser}">
+                                     <button class="">Delete Selected User</button>
+                                    
+                            <table class="table table-striped table-responsive-md">
+                                <thead>
+                                    <tr>
+                                    <th></th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>                                     
+                                        <th>Email</th>
+                                        <th>Phone No</th>
+                                         <th>Nationality</th>
+                                         <th>Gender</th>
+                                         <th>Role</th>
+                                         <th>Status</th>
+                                        <th></th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="user : ${users}">
+                                         <td><input 
+										      type="checkbox" 
+										      name="userid" 
+										      th:value="${user.id}"
+										      /></td>
+                                        <td th:text="${user.firstname}"></td>
+                                         <td th:text="${user.lastname}"></td>
+                                        <td th:text="${user.email}"></td>
+                                        <td th:text="${user.phone}"></td>
+                                         <td th:text="${user.Nationality}"></td>
+                                         <td th:text="${user.Gender}"></td>
+                                         <td th:text="${user.role}"></td>
+                                         <td th:text="${user.active}"></td>
+                                        <td><a th:href="@{/edit/{id}(id=${user.id})}">Edit</a></td>
+                                        
+                                    </tr>
+                                </tbody>
+                            </table>
+                             </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    
+</body>
+</html>
